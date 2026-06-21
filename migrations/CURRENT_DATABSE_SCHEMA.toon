@@ -1,0 +1,144 @@
+[143]{table_schema,table_name,column_name,ordinal_position,data_type,character_maximum_length,is_nullable,column_default,is_primary_key,foreign_table_schema,foreign_table_name,foreign_column_name,fk_constraint_name}:
+  public,approval_gates,id,1,uuid,null,NO,gen_random_uuid(),YES,null,null,null,null
+  public,approval_gates,chat_id,2,uuid,null,NO,null,NO,public,chats,id,approval_gates_chat_id_fkey
+  public,approval_gates,gate_type,3,character varying,50,NO,null,NO,null,null,null,null
+  public,approval_gates,status,4,character varying,20,NO,"'pending'::character varying",NO,null,null,null,null
+  public,approval_gates,resolved_band_message_id,5,character varying,null,YES,null,NO,null,null,null,null
+  public,approval_gates,created_at,6,timestamp with time zone,null,NO,"timezone('utc'::text, now())",NO,null,null,null,null
+  public,approval_gates,updated_at,7,timestamp with time zone,null,NO,"timezone('utc'::text, now())",NO,null,null,null,null
+  public,artifact_versions,id,1,uuid,null,NO,gen_random_uuid(),YES,null,null,null,null
+  public,artifact_versions,artifact_id,2,uuid,null,YES,null,NO,public,artifacts,id,artifact_versions_artifact_id_fkey
+  public,artifact_versions,version_number,3,integer,null,NO,null,NO,null,null,null,null
+  public,artifact_versions,content,4,text,null,YES,null,NO,null,null,null,null
+  public,artifact_versions,content_json,5,jsonb,null,YES,null,NO,null,null,null,null
+  public,artifact_versions,filename,6,text,null,YES,null,NO,null,null,null,null
+  public,artifact_versions,language,7,text,null,YES,null,NO,null,null,null,null
+  public,artifact_versions,change_summary,11,text,null,YES,null,NO,null,null,null,null
+  public,artifact_versions,parent_version_id,12,uuid,null,YES,null,NO,public,artifact_versions,id,artifact_versions_parent_version_id_fkey
+  public,artifact_versions,created_by_message_id,13,uuid,null,YES,null,NO,public,messages,id,artifact_versions_created_by_message_id_fkey
+  public,artifact_versions,created_at,14,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,artifact_versions,created_by,15,uuid,null,YES,null,NO,null,null,null,null
+  public,artifact_versions,fritzing_url,16,text,null,YES,null,NO,null,null,null,null
+  public,artifact_versions,diagram_status,17,text,null,YES,"'pending'::text",NO,null,null,null,null
+  public,artifact_versions,generation_attempts,18,integer,null,YES,"0",NO,null,null,null,null
+  public,artifact_versions,error_message,19,text,null,YES,null,NO,null,null,null,null
+  public,artifacts,id,1,uuid,null,NO,gen_random_uuid(),YES,null,null,null,null
+  public,artifacts,chat_id,2,uuid,null,YES,null,NO,public,chats,id,artifacts_chat_id_fkey
+  public,artifacts,project_id,3,uuid,null,YES,null,NO,public,projects,id,artifacts_project_id_fkey
+  public,artifacts,type,4,text,null,NO,null,NO,null,null,null,null
+  public,artifacts,title,5,text,null,NO,null,NO,null,null,null,null
+  public,artifacts,current_version,6,integer,null,YES,"1",NO,null,null,null,null
+  public,artifacts,metadata,7,jsonb,null,YES,"'{}'::jsonb",NO,null,null,null,null
+  public,artifacts,created_at,8,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,artifacts,updated_at,9,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,chat_sessions,id,1,uuid,null,NO,gen_random_uuid(),YES,null,null,null,null
+  public,chat_sessions,chat_id,2,uuid,null,YES,null,NO,public,chats,id,chat_sessions_chat_id_fkey
+  public,chat_sessions,current_agent,3,text,null,YES,null,NO,null,null,null,null
+  public,chat_sessions,agent_context,4,jsonb,null,YES,null,NO,null,null,null,null
+  public,chat_sessions,is_plan_locked,5,boolean,null,YES,"false",NO,null,null,null,null
+  public,chat_sessions,locked_blueprint,6,jsonb,null,YES,null,NO,null,null,null,null
+  public,chat_sessions,budget_range,7,text,null,YES,null,NO,null,null,null,null
+  public,chat_sessions,budget_target,8,numeric,null,YES,null,NO,null,null,null,null
+  public,chat_sessions,last_active_at,9,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,chat_sessions,created_at,10,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,chat_sessions,selected_provider,11,text,null,YES,"'openrouter'::text",NO,null,null,null,null
+  public,chat_sessions,selected_model,12,text,null,YES,null,NO,null,null,null,null
+  public,chat_sessions,provider_metadata,13,jsonb,null,YES,"'{}'::jsonb",NO,null,null,null,null
+  public,chat_sessions,project_stage,14,text,null,NO,"'planning'::text",NO,null,null,null,null
+  public,chat_sessions,stage_override,15,boolean,null,NO,"false",NO,null,null,null,null
+  public,chat_sessions,auto_orchestration,16,boolean,null,NO,"true",NO,null,null,null,null
+  public,chat_sessions,stage_history,17,jsonb,null,YES,"'[]'::jsonb",NO,null,null,null,null
+  public,chats,id,1,uuid,null,NO,gen_random_uuid(),YES,null,null,null,null
+  public,chats,user_id,2,uuid,null,YES,null,NO,null,null,null,null
+  public,chats,project_id,3,uuid,null,YES,null,NO,public,projects,id,chats_project_id_fkey
+  public,chats,title,4,text,null,YES,"'New Hardware Project'::text",NO,null,null,null,null
+  public,chats,is_archived,5,boolean,null,YES,"false",NO,null,null,null,null
+  public,chats,is_public,6,boolean,null,YES,"false",NO,null,null,null,null
+  public,chats,share_token,7,text,null,YES,null,NO,null,null,null,null
+  public,chats,last_message_at,8,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,chats,created_at,9,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,chats,updated_at,10,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,component_templates,id,1,uuid,null,NO,gen_random_uuid(),YES,null,null,null,null
+  public,component_templates,name,2,text,null,NO,null,NO,null,null,null,null
+  public,component_templates,category,3,text,null,NO,null,NO,null,null,null,null
+  public,component_templates,manufacturer,4,text,null,YES,null,NO,null,null,null,null
+  public,component_templates,svg_symbol,5,text,null,YES,null,NO,null,null,null,null
+  public,component_templates,breadboard_image_url,6,text,null,YES,null,NO,null,null,null,null
+  public,component_templates,pinout_diagram_url,7,text,null,YES,null,NO,null,null,null,null
+  public,component_templates,pins,8,jsonb,null,NO,null,NO,null,null,null,null
+  public,component_templates,voltage_range,9,text,null,YES,null,NO,null,null,null,null
+  public,component_templates,interface_types,10,ARRAY,null,YES,null,NO,null,null,null,null
+  public,component_templates,default_specs,11,jsonb,null,YES,null,NO,null,null,null,null
+  public,component_templates,description,12,text,null,YES,null,NO,null,null,null,null
+  public,component_templates,common_uses,13,ARRAY,null,YES,null,NO,null,null,null,null
+  public,component_templates,created_at,14,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,connections,id,1,uuid,null,NO,gen_random_uuid(),YES,null,null,null,null
+  public,connections,project_id,2,uuid,null,YES,null,NO,public,projects,id,connections_project_id_fkey
+  public,connections,artifact_id,3,uuid,null,YES,null,NO,public,artifacts,id,connections_artifact_id_fkey
+  public,connections,from_part_id,4,uuid,null,YES,null,NO,public,parts,id,connections_from_part_id_fkey
+  public,connections,from_pin,5,text,null,NO,null,NO,null,null,null,null
+  public,connections,to_part_id,6,uuid,null,YES,null,NO,public,parts,id,connections_to_part_id_fkey
+  public,connections,to_pin,7,text,null,NO,null,NO,null,null,null,null
+  public,connections,wire_color,8,text,null,YES,null,NO,null,null,null,null
+  public,connections,wire_gauge,9,text,null,YES,null,NO,null,null,null,null
+  public,connections,sequence_number,10,integer,null,YES,null,NO,null,null,null,null
+  public,connections,validation_result,11,jsonb,null,YES,"'{\"status\": \"pending\"}'::jsonb",NO,null,null,null,null
+  public,connections,notes,12,text,null,YES,null,NO,null,null,null,null
+  public,connections,created_at,13,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,diagram_cache,id,1,uuid,null,NO,gen_random_uuid(),YES,null,null,null,null
+  public,diagram_cache,circuit_hash,2,text,null,NO,null,NO,null,null,null,null
+  public,diagram_cache,fritzing_url,3,text,null,NO,null,NO,null,null,null,null
+  public,diagram_cache,created_at,4,timestamp without time zone,null,YES,now(),NO,null,null,null,null
+  public,diagram_cache,access_count,5,integer,null,YES,"0",NO,null,null,null,null
+  public,diagram_cache,last_accessed_at,6,timestamp without time zone,null,YES,now(),NO,null,null,null,null
+  public,diagram_queue,id,1,uuid,null,NO,gen_random_uuid(),YES,null,null,null,null
+  public,diagram_queue,circuit_json,2,jsonb,null,NO,null,NO,null,null,null,null
+  public,diagram_queue,artifact_id,3,uuid,null,NO,null,NO,public,artifact_versions,id,diagram_queue_artifact_id_fkey
+  public,diagram_queue,chat_id,4,uuid,null,NO,null,NO,public,chats,id,diagram_queue_chat_id_fkey
+  public,diagram_queue,status,5,text,null,YES,"'queued'::text",NO,null,null,null,null
+  public,diagram_queue,created_at,6,timestamp without time zone,null,YES,now(),NO,null,null,null,null
+  public,diagram_queue,processed_at,7,timestamp without time zone,null,YES,null,NO,null,null,null,null
+  public,diagram_queue,error_message,8,text,null,YES,null,NO,null,null,null,null
+  public,messages,id,1,uuid,null,NO,gen_random_uuid(),YES,null,null,null,null
+  public,messages,chat_id,2,uuid,null,YES,null,NO,public,chats,id,messages_chat_id_fkey
+  public,messages,sequence_number,3,integer,null,NO,null,NO,null,null,null,null
+  public,messages,role,4,text,null,NO,null,NO,null,null,null,null
+  public,messages,content,5,text,null,NO,null,NO,null,null,null,null
+  public,messages,agent_name,6,text,null,YES,null,NO,null,null,null,null
+  public,messages,intent,8,text,null,YES,null,NO,null,null,null,null
+  public,messages,input_tokens,9,integer,null,YES,"0",NO,null,null,null,null
+  public,messages,output_tokens,10,integer,null,YES,"0",NO,null,null,null,null
+  public,messages,created_at,12,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,messages,content_search,13,tsvector,null,YES,null,NO,null,null,null,null
+  public,messages,agent_id,14,text,null,YES,null,NO,null,null,null,null
+  public,messages,metadata,15,jsonb,null,YES,null,NO,null,null,null,null
+  public,parts,id,1,uuid,null,NO,gen_random_uuid(),YES,null,null,null,null
+  public,parts,project_id,2,uuid,null,YES,null,NO,public,projects,id,parts_project_id_fkey
+  public,parts,template_id,3,uuid,null,YES,null,NO,public,component_templates,id,parts_template_id_fkey
+  public,parts,artifact_id,4,uuid,null,YES,null,NO,public,artifacts,id,parts_artifact_id_fkey
+  public,parts,name,5,text,null,NO,null,NO,null,null,null,null
+  public,parts,part_number,6,text,null,YES,null,NO,null,null,null,null
+  public,parts,category,7,text,null,YES,null,NO,null,null,null,null
+  public,parts,subcategory,8,text,null,YES,null,NO,null,null,null,null
+  public,parts,quantity,9,integer,null,YES,"1",NO,null,null,null,null
+  public,parts,price,10,numeric,null,YES,null,NO,null,null,null,null
+  public,parts,supplier,11,text,null,YES,null,NO,null,null,null,null
+  public,parts,supplier_url,12,text,null,YES,null,NO,null,null,null,null
+  public,parts,lead_time_days,13,integer,null,YES,null,NO,null,null,null,null
+  public,parts,position,14,jsonb,null,YES,"'{\"x\": 0, \"y\": 0, \"rotation\": 0}'::jsonb",NO,null,null,null,null
+  public,parts,usage_notes,15,ARRAY,null,YES,null,NO,null,null,null,null
+  public,parts,specs,16,jsonb,null,YES,"'{}'::jsonb",NO,null,null,null,null
+  public,parts,created_at,17,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,projects,id,1,uuid,null,NO,gen_random_uuid(),YES,null,null,null,null
+  public,projects,user_id,2,uuid,null,YES,null,NO,null,null,null,null
+  public,projects,name,3,text,null,NO,null,NO,null,null,null,null
+  public,projects,description,4,text,null,YES,null,NO,null,null,null,null
+  public,projects,category,5,text,null,YES,null,NO,null,null,null,null
+  public,projects,goal,6,text,null,YES,null,NO,null,null,null,null
+  public,projects,target_budget,8,numeric,null,YES,null,NO,null,null,null,null
+  public,projects,current_estimated_cost,9,numeric,null,YES,null,NO,null,null,null,null
+  public,projects,status,10,text,null,YES,"'draft'::text",NO,null,null,null,null
+  public,projects,is_locked,11,boolean,null,YES,"false",NO,null,null,null,null
+  public,projects,metadata,12,jsonb,null,YES,"'{}'::jsonb",NO,null,null,null,null
+  public,projects,created_at,13,timestamp with time zone,null,YES,now(),NO,null,null,null,null
+  public,projects,updated_at,14,timestamp with time zone,null,YES,now(),NO,null,null,null,null
